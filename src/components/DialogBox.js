@@ -1,20 +1,17 @@
 import Button from "./Button";
 import Form from "./Form";
+import {useState} from "react";
 
-export default function DialogBox() {
-  const isOpen = "visible";
+export default function DialogBox({onClose}) {
   function handleSubmit() {}
-  function handleCancel(e) {
-    this.setState({ isOpen: "none" });
-  }
 
   return (
-    <div className="dialogBox" style={{ display: isOpen }}>
+    <div className="dialogBox">
       <Form />
-      <Button className="pull-right" onClick={handleSubmit}>
+      <Button className="pull-right" onClick={handleSubmit()}>
         Submit
       </Button>
-      <Button className="pull-right" onClick={handleCancel}>
+      <Button className="pull-right" onClick={onClose}>
         Cancel
       </Button>
     </div>
