@@ -1,7 +1,7 @@
-export default function Button({ onClick, children }) {
+export default function Button({ onClick, id, children }) {
     return (
       <div className="pull-left">
-        <button id="Addbutton" onClick={onClick}>{children}</button>
+        <button id={id} onClick={onClick}>{children}</button>
       </div>
     );
   }

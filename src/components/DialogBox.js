@@ -8,10 +8,10 @@ export default function DialogBox({onClose}) {
   return (
     <div className="dialogBox">
       <Form />
-      <Button className="pull-right" onClick={handleSubmit()}>
+      <Button id="Submit" className="pull-right" onClick={handleSubmit()}>
         Submit
       </Button>
-      <Button className="pull-right" onClick={onClose}>
+      <Button id="Cancel" className="pull-right" onClick={onClose}>
         Cancel
       </Button>
     </div>
