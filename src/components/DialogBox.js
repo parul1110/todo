@@ -1,16 +1,10 @@
 import Button from "./Button";
 import Form from "./Form";
-import {useState} from "react";
 
-export default function DialogBox({onClose}) {
-  function handleSubmit() {}
-
+export default function DialogBox({ onClose, onOpen }) {
   return (
     <div className="dialogBox">
-      <Form />
-      <Button id="Submit" className="pull-right" onClick={handleSubmit()}>
-        Submit
-      </Button>
+      <Form onOpen={onOpen} />
       <Button id="Cancel" className="pull-right" onClick={onClose}>
         Cancel
       </Button>

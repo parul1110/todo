@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ListContext } from "./Context";
 import ListItem from "./ListItem";
 
 function List() {
-  const list = useState([]);
-  //const listItems = list.map((l) => <ListItem key={l.id} item={l} />);
-  //console.log({ list });
+  const { list } = useContext(ListContext);
+
   return (
-    <div>
-      {list[0].length === 0 && <p>No todos</p>}
-      {/* {list[0].length > 0 && listItems} */}
+    <div className="completeList">
+      {list.length === 0 && <p>No todos</p>}
+      <table>
+        {list.length > 0 && list.map((l) => <ListItem key={l.id} item={l} />)}
+      </table>
     </div>
   );
 }

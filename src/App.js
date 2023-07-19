@@ -7,7 +7,6 @@ function App() {
     <div className="App">
         <h3>TODO List</h3>
         <Toolbar />
-        <List />
     </div>
   );
 }

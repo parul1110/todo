@@ -9,6 +9,12 @@
 }
 .pull-right {
   float: right;
+  margin-left: 5px;
+}
+.listCard {
+  background-color: lavender;
+  padding: 10px;
+  width: 100%;
 }
 .dialogBox {
   background-color: honeydew;
