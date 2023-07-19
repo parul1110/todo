@@ -1,12 +1,15 @@
 import Button from "./Button";
 import DialogBox from "./DialogBox";
-import { useState, useRef } from "react";
-import { ListContext } from "./Context";
+import { useState, useRef, useContext } from "react";
+import { useLists, useTasksDispatch } from "./Context";
 import List from "./List";
 
 function Toolbar() {
   const [isDialog, setDialog] = useState(false);
-  const [list, setList] = useState([]);
+  let isFlList = [];
+  const [isAll, setAll] = useState("All");
+  const dispatch = useTasksDispatch();
+  const list = useLists();
   let count = useRef(0);
 
   const handleClick = (e) => {
@@ -23,20 +26,13 @@ function Toolbar() {
       task: e.target[0].value,
       status: e.target[1].value
     };
-    setList([...list, item]);
+    dispatch({type: "Add", task: item })
     setDialog(!isDialog);
   };
 
   const handleStatus = (e) => {
     e.preventDefault();
-    // setStatus({ status: e.target.value });
-    // let fl = [];
-    // if (status === "All") {
-    //   fl = list;
-    // } else {
-    //   fl = list.filter((l) => l.status === status);
-    // }
-    // setFilteredList({ filteredList: fl });
+      setAll(e.target.value);
   };
 
   return (
@@ -54,9 +50,7 @@ function Toolbar() {
         <option value="Incomplete">Incomplete</option>
         <option value="Complete">Complete</option>
       </select>
-      <ListContext.Provider value={{ list, setList }}>
-        <List />
-      </ListContext.Provider>
+      <List list = {list} filter = {isAll} />
       <div className="centerpoint">
         {isDialog && <DialogBox onClose={handleClick} onOpen={handleSubmit} />}
       </div>

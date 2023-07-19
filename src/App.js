@@ -1,12 +1,14 @@
 import './App.css';
 import Toolbar from './components/Toolbar';
-import List from './components/List';
+import { ListProvider } from './components/Context';
 
 function App() {
   return (
     <div className="App">
         <h3>TODO List</h3>
+        <ListProvider>
         <Toolbar />
+        </ListProvider>
     </div>
   );
 }

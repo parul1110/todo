@@ -1,15 +1,21 @@
-import { useContext } from "react";
-import { ListContext } from "./Context";
+import { useLists } from "./Context";
 import ListItem from "./ListItem";
 
-function List() {
-  const { list } = useContext(ListContext);
+function List({list, filter}) {
+  
+  const fl = list.filter((item)=>{
+      if(filter==="All"){
+        return item;
+      }else if(item.status===filter){
+        return item;
+      }
+  });
 
   return (
     <div className="completeList">
-      {list.length === 0 && <p>No todos</p>}
+      {fl.length === 0 && <p>No todos</p>}
       <table>
-        {list.length > 0 && list.map((l) => <ListItem key={l.id} item={l} />)}
+        {fl.length > 0 && fl.map((l) => <ListItem key={l.id} item={l} />)}
       </table>
     </div>
   );
