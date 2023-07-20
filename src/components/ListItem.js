@@ -3,12 +3,13 @@ import { useTasksDispatch } from "./Context";
 
 export default function ListItem({ item }) {
   const dispatch = useTasksDispatch();
-  //const [isSave, setEdit
+  const [isSave, setSave] = useState(false);
   const [isChecked, setChecked] = useState(item.status==="Complete"? true:false);
+  const [inpValue, setinpValue] = useState(item.task);
 
   const handleEdit = (e) => {
       e.preventDefault();
-      dispatch({type: "Edit"});
+      setSave({isSave: !isSave});
     };
   
     const handleDelete = (e) => {
@@ -24,24 +25,40 @@ export default function ListItem({ item }) {
 
     }
   
+    const handleInput = (e) => {
+      setinpValue(e.target.value);
+    }
+
+    const handleSave = (e) => {
+      //e.preventDefault();
+      setSave(!isSave);
+      dispatch({type: "Save", task: inpValue, id: item.id});
+    }
+
     return (
       <div>
         <div className="listCard">
           <span className="pull-left">
             <input type="checkbox" value = {isChecked} defaultChecked = {item.status==="Complete"} onChange={handleStatus}></input>
           </span>
-          <span className="pull-left">{item.task}</span>
-          {/* <input type="text" className="pull-left">{item.task}</input> */}
+          {!isSave && <span className="pull-left">{item.task}</span>}
+          {isSave && <input type="text" className="pull-left" value={inpValue} onChange={handleInput}></input>}
+          
           <span className="">{item.status}</span>
           <span>
-            <button className="pull-right" id="edit" onClick={handleEdit}>
+            {!isSave && <button className="pull-right" id="edit" onClick={handleEdit}>
               Edit
-            </button>
+            </button>}
           </span>
           <span>
-            <button className="pull-right" id="delete" onClick={handleDelete}>
+          {!isSave && <button className="pull-right" id="delete" onClick={handleDelete}>
               Delete
-            </button>
+            </button>}
+          </span>
+          <span>
+          {isSave && <button className="pull-right" id="save" onClick={handleSave}>
+              Save
+            </button>}
           </span>
         </div>
         <br />

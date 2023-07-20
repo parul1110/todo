@@ -24,7 +24,13 @@ function taskReducer(state, action){
                 }
                 return item;
             });
-
+        case "Save":
+            return state.map((item) => {
+                if(item.id === action.id){
+                    item.task= action.task;
+                }
+                return item;
+            });
         default:
             throw new Error();
     }
